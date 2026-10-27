@@ -47,11 +47,8 @@ import java.util.Date;
                     .getPayload();
         }
 
-        public boolean isTokenValid(String token, String username) {
-            Claims claims = extractClaims(token);
-
-            return claims.getSubject().equals(username)
-                    && claims.getExpiration().after(new Date());
-        }
+    public boolean isTokenValid(String token, String username) {
+        return extractClaims(token).getSubject().equals(username);
+    }
 
 }

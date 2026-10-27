@@ -19,6 +19,10 @@ public class AuthService {
     }
 
     public void register(String username, String password) {
+        if (userRepository.existsByUsername(username)) {
+            throw new org.springframework.web.server.ResponseStatusException(
+                    org.springframework.http.HttpStatus.CONFLICT, "Username already taken");
+        }
         AppUser user = new AppUser();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
